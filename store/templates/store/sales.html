@@ -1,0 +1,43 @@
+{% extends "home/base.html" %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<article class="media content-section text">
+    <div class="card-deck row col-11"  width="100%">
+        {% for sale in sales %}
+            <div class="card col-md-9" >
+                <img class="card-img-top" src="{{ sale.image.url }}" style="object-fit: contain; height: 200px; width: 100%; " alt="Card image cap">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="title">{{sale.title}} <small class="text-muted" style="font-size: 60%;">{{sale.date_posted.date|date:'d/m/Y'}}</small> </h4>
+                        
+                    </div>
+                    {% with total_chars=sale.content|length %}
+                    {% if total_chars >= 100 %}
+                    <details>
+                        <summary>לחצו כאן לקבלת כל פרטי המבצע</summary>
+                    
+                        <p> {{sale.content|linebreaks}}</p>
+                    </details>
+                    {% else %}
+                    {{sale.content|linebreaks}}
+                    {% endif %}
+                    {% endwith %}
+                    
+                </p>
+                </div>
+                <ul class="cards_ul list-group list-group-flush">
+                    <li class="list-group-item">קוד קופון
+                        <input type="text" size="10" value="{{sale.coupon_code}}" id="copy{{sale.id}}">
+                        <br><br>
+                        <div class="card">
+                            <a href="#" class="btn btn-secondary">מעבר לאתר</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+{% endfor %}
+    </div>
+</article>
+
+
+{% endblock content %}

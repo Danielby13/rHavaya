@@ -1,0 +1,105 @@
+{% extends "home/base.html" %}
+{% block content %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: right;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    
+    .w3-modal {
+    z-index: 1001; 
+    word-wrap: break-word;
+}
+    </style>
+
+<article class="media content-section">
+    <div class="media-body text">
+        <legend class="border-bottom mb-4 title">
+            אישור תגובות
+        </legend>
+          <p class="article-content">
+            <div style="overflow-x:auto;">
+                
+                <table>
+                    
+                  <tr>
+                    <th>כותרת </th>
+                    <th>כותב </th>
+                    <th>תוכן </th>
+                    <th>ניהול תגובה </th>
+                  </tr>
+                  {% for feedback in feedbacks%}
+                  <tr>
+                    <td>{{feedback.title}} </td>
+                    <td>{{feedback.author}}</td>
+                    <td>
+
+                        <button class="btn-secondary btn-sm mt-1 mb-1" data-toggle="modal"  data-target="#manage_feedback_content{{ feedback.id }}" style="float: right;" href="#">לקריאה</button> 
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="manage_feedback_content{{ feedback.id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <!-- <h4 class="modal-title text" style="text-align: right;"></h4> -->
+                                <p style="margin: 0 auto;"></p>
+                              </div>
+                              <div class="modal-body w3-modal">
+                                {{feedback.content|linebreaks}}
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>          
+                    </td>
+                    <td>
+                        <button class="btn-secondary btn-sm mt-1 mb-1" data-toggle="modal"  data-target="#manage_feedback{{ feedback.id }}" style="float: right;" href="#">לאישור</button> 
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="manage_feedback{{ feedback.id }}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text" style="text-align: right;">אישור משתמש</h4>
+                                <p style="margin: 0 auto;"></p>
+                              </div>
+                              <div class="modal-body">
+                                <b>האם אתם רוצים לאשר את התגובה?</b><br><br>
+                                <form method="POST">
+                                  {% csrf_token %}
+                                  <input value="{{ feedback.id }}" name= "id" hidden>
+                                  <button class = "btn-success btn-sm mt-1 mb-1 float-right" type="submit" value="Click" name= "approved_feedback">לאשר</button>
+                                  <button class = "btn-danger btn-sm mt-1 mb-1 float-left" type="submit" value="Click" name= "delete_feedback">לא לאשר </button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                    
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </p>
+      </div>
+  </article>
+{% endblock content %}

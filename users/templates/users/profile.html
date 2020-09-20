@@ -1,0 +1,41 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="text content-section">
+        <div class="profile_title">
+                    שלום, {{user.first_name}} {{user.last_name}} 
+        </div>
+        <img class="rounded-circle account-img" width="270px" height="270px" style="float:left; position: relative; border:1px solid #b9c6c6" src="{{ user.profile.image.url }}">
+         <br>
+        <div style="font-size:22px;"><b>קצת עליי:</b></div>
+            <div class="box">
+            {{ user.profile.about_me|linebreaks }}
+            </div>
+            <br><br>
+        <div style="font-size:16px">
+            האם אני נמצא\ת בהכר את הרוכב:
+            {% if user.profile.join_meet_the_rider %}
+            <b>כן</b>
+             {% else %}
+             <b>לא</b>
+             {% endif %}
+        </div>
+        <br><br><br>
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#demo">עדכון פרטים </button>
+        <div id="demo" class="collapse">
+            <br>
+                <div>
+                    <form method="POST" enctype="multipart/form-data"> 
+                        {% csrf_token %}
+                        <fieldset class="form-group" style="width:400px">
+                            {{ u_form|crispy }}
+                            {{ p_form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-secondary" type="submit">שמור שינויים</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+	</div>
+{% endblock content %}

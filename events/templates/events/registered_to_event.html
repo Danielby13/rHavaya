@@ -1,0 +1,77 @@
+{% extends "home/base.html" %}
+{% block content %}
+<style>
+    body { margin:0;padding:0; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout:fixed;
+    }
+    
+    th, td {
+      text-align: center;
+      padding: 8px;
+      overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+    }
+    @media only screen and (max-width: 480px) {
+    /* horizontal scrollbar for tables if mobile screen */
+    .tablemobile {
+        overflow-x: auto;
+        display: block;
+    }
+}
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<article class="media content-section">
+    <div class="media-body text">
+        <legend class="border-bottom mb-4 title">
+            מעקב נרשמים
+        </legend>
+          <p class="article-content">
+            <div style="overflow-x:auto;">
+                
+                <table>
+                    
+                  <tr>
+                    <th>שם </th>
+                    <th>תאריך </th>
+                    <th>שם משתמש </th>
+                    <th>שם פרטי </th>
+                    <th>שם משפחה </th>
+                    <th>מספר פלאפון </th>
+                    <th>כמות אנשים </th>
+                  </tr>
+                  {% for ride in reg_to_events%}
+                  <tr>
+                    {% ifchanged ride.event.title%}
+                    <td><u>{{ride.event.title}}</u><br>סה"כ נרשמו:  {{ride.event.attended_to_event}}</td>
+                    {%else%}
+                    <td><br></td>
+                    {% endifchanged %}
+
+                    {% ifchanged ride.event.event_date%}
+                    <td>{{ride.event.event_date|date:'d-m-y'}}</td>
+                    {%else%}
+                    <td><br></td>
+                    {% endifchanged %}
+                    <td>{{ride.user.username}}</td>
+                    <td>{{ride.user.first_name}}</td>
+                    <td>{{ride.user.last_name}}</td>
+                    <td>{{ride.user.profile.phone_number}}</td>
+                    <td>{{ride.passengers_counter}}</td>
+                  </tr>
+
+                  {% endfor %}
+                </table>
+                
+              </div>
+            </p>
+      </div>
+  </article>
+
+{% endblock content %}

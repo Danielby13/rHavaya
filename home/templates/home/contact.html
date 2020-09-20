@@ -1,0 +1,24 @@
+
+{% extends "home/base.html" %}
+{% block content %}
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    {% for ab in about %}
+        <article class="media content-section">
+          <div class="media-body text">
+            <legend class="border-bottom mb-4 title">
+                {{ ab.title }}
+                </legend>
+            <p class="article-content">
+              {% autoescape off %}
+              {{ ab.content|linebreaks }}
+              <a class="fb-ic" role="button" href="https://www.facebook.com/groups/112813196231187/?ref=share" target="_blank"><i class="fab fa-lg fa-facebook-f"></i> פייסבוק</a><br>
+              <a class="telegram-ic" role="button" href="https://t.me/joinchat/HsawFBTmGwTQ1HdVICSEgQ" target="_blank"> <i class="fab fa-lg fa-telegram" aria-hidden="true"></i> טלגרם</a><br>
+              <a class="whatsapp-ic button-whatsapp" role="button" href="https://chat.whatsapp.com/4F40vLDcddEC7M6omhEmWF" target="_blank"><i class="fab fa-lg fa-whatsapp"></i> וואטסאפ</a><br>
+              <i class="button-gmail far fa-envelope"></i> rochvim.h@gmail.com
+              
+              {% endautoescape %}
+            </p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

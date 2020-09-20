@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="heb">
+<head>
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+<!-- Include all Editor plugins CSS style. -->
+<link rel="stylesheet" href="../css/froala_editor.pkgd.min.css">
+
+<!-- Include Code Mirror CSS. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<!-- Include Code Mirror JS. -->
+
+<script type="text/javascript" src=" 	https://cdnjs.cloudflare.com/ajax/libs/emojione/4.5.0/lib/js/emojione.min.js"></script>
+
+<!-- Include PDF export JS lib. -->
+<script type="text/javascript" src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'base/main.css' %}">
+    <title>רוכבים חוויה</title>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="opacity: 0.9;">
+  <div class="container"> 
+    
+    <a class="navbar-brand" href="{% url 'home-page' %}">
+        <img src="/static/img/RochvimLogoSmall.png" alt="Rochvim Havaya" height="40" width="70">
+    </a>
+    <a class="navbar-brand" href="{% url 'home-page' %}">רוכבים חוויה</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item dropdown text">
+          <a class="nav-link dropdown-toggle font-color" href="#" id="navbarDropdownMenuSales" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            קצת עלינו
+          </a>
+          <div class="dropdown-menu text" aria-labelledby="navbarDropdownMenuSales">
+            <a class="dropdown-item" href="{% url 'aboutus-page' %}">אודות</a>
+            <a class="dropdown-item" href="{% url 'vision-page' %}">חזון הקבוצה</a>
+            <a class="dropdown-item" href="{% url 'rules-page' %}">חוקי הקבוצה והרכיבה</a>
+            <a class="dropdown-item" href="{% url 'feedback' %}">מה אומרים עלינו</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-sm-right text-right font-color" href="{% url 'riders' %}">הכר את הרוכב</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-sm-right text-right font-color" href="{% url 'gallery' %}">גלרייה</a>
+        </li>
+
+        <li class="nav-item dropdown text">
+          <a class="nav-link dropdown-toggle font-color" href="#" id="navbarDropdownMenuEvents" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            אירועים
+          </a>
+          <div class="dropdown-menu text" aria-labelledby="navbarDropdownMenuEvents">
+            <a class="dropdown-item" href="{% url 'events' %}">מפגשים</a>
+            <a class="dropdown-item" href="{% url 'rides' %}">טיולים</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown text">
+          <a class="nav-link dropdown-toggle font-color" href="#" id="navbarDropdownMenuSales" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            חנות
+          </a>
+          <div class="dropdown-menu text" aria-labelledby="navbarDropdownMenuSales">
+            <a class="dropdown-item" href="{% url 'sales' %}">מבצעים לחברי הקבוצה</a>
+            <a class="dropdown-item" href="{% url 'collaborations' %}">שיתופי פעולה</a>
+          </div>
+        </li>
+
+        <li class="nav-item ">
+          <a class="font-color nav-link text-sm-right text-right" href="{% url 'contact-page' %}">צור קשר</a>
+        </li>
+
+        {% if user.is_staff%}
+        <li class="nav-item dropdown text">
+          <a class="nav-link dropdown-toggle font-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            פאנל ניהול
+          </a>
+          <div class="dropdown-menu text" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'admin-db' %}">דף אדמין</a>
+            <a class="dropdown-item" href="{% url 'update_about_page' %}">עדכון קצת עליי ודף ראשי</a>
+            <a class="dropdown-item" href="{% url 'userapproval' %}">אישור משתמשים</a>
+            <a class="dropdown-item" href="{% url 'feedback_approval' %}">אישור תגובות</a>
+            <a class="dropdown-item" href="{% url 'reg_to_ride' %}">מעקב הרשמות-טיולים</a>
+            <a class="dropdown-item" href="{% url 'reg_to_event' %}">מעקב הרשמות-מפגשים</a>
+          </div>
+        </li>
+        {% endif %}
+      </ul>
+
+      {% if user.is_authenticated%}
+        <div class="font-color">
+          <a href="{% url 'profile' %}"><span class="font-color"><b>{{user.first_name}} {{user.last_name}}</b></span></a>
+          <a href="{% url 'logout' %}"><span class="font-color">התנתקות</span></a>
+        </div>
+      {% else%}
+        <div class="font-color">
+          <a href="{% url 'login' %}"><span class="font-color">התחברות</span></a>
+          <a href="{% url 'register' %}"><span class="font-color">הרשמה</span></a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+</header>
+</head>
+<body> 
+  <div class="frontpage_picture">
+      <img class="d-block w-100" src="/static/img/fronpage_picture4(2).png" alt="First slide">
+  </div>
+</header>
+
+<!-- Page Content -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="future_events_box_heading alert alert-{{message.tags}}">
+      {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<section class="py-5">
+  <div class="container">
+{% block content %}{% endblock %}
+  </div>
+</section>
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    <small><b> כל הזכויות שמורות לדו גלגלי רוכבים חוויה ©</b></small>
+    <!--Facebook-->
+  <a class="fb-ic mr-3" role="button" href="https://www.facebook.com/groups/112813196231187/?ref=share" target="_blank"><i class="fab fa-lg fa-facebook-f"></i></a>
+
+  <!-- Telegram -->
+  <a class="telegram-ic" role="button" href="https://t.me/joinchat/HsawFBTmGwTQ1HdVICSEgQ" target="_blank"> <i class="fab fa-lg fa-telegram" aria-hidden="true"></i></a>
+  <!--WhatsApp-->
+  <a class="whatsapp-ic button-whatsapp" role="button" href="https://chat.whatsapp.com/4F40vLDcddEC7M6omhEmWF" target="_blank"><i class="fab fa-lg fa-whatsapp"></i></a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</body>
+</html>
+

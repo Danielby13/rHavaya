@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="text content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<div class="title">
+				<legend class="border-bottom mb-4 ">
+						הרשמה 
+				</legend>
+			</div>
+			<fieldset class="form-group" style="width:400px">
+				{{ form|crispy }}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">הרשמה</button>
+			</div>
+		</form>
+		<div class="border-top pt-3 future_events_box_bottom">
+			<small class="text-muted"> כבר נרשמתם? <a class="ml-2" href="{% url 'login' %}">התחברו</a></small>
+		</div>
+	</div>
+{% endblock content %}

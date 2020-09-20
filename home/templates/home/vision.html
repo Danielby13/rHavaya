@@ -1,0 +1,14 @@
+
+{% extends "home/base.html" %}
+{% block content %}
+    {% for vs in about %}
+        <article class="media content-section">
+          <div class="media-body text">
+            <legend class="border-bottom mb-4 title">
+              {{ vs.title }}
+              </legend>
+            <p class="article-content">{% autoescape off %}{{ vs.content|linebreaks }} {% endautoescape %}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

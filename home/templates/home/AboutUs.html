@@ -1,0 +1,13 @@
+{% extends "home/base.html" %}
+{% block content %}
+    {% for ab in about %}
+        <article class="media content-section">
+          <div class="media-body text">
+            <legend class="border-bottom mb-4 title">
+              {{ ab.title }}
+              </legend>
+            <p class="article-content">{% autoescape off %} {{ ab.content|linebreaks }} {% endautoescape %}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

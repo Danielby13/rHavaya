@@ -1,0 +1,30 @@
+{% extends "home/base.html" %}
+{% block content %}
+        <article class="media content-section">
+          <div class="media-body text">
+            <div class="row col-15 ">
+                {% for rider in riders %}
+                <div class="card col-3" style=" width: 35rem;  margin: 30px;">
+                    <img class="card-img-top " style="object-fit: contain; height: 200px; width: 100%;" src="{{ rider.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b> {{rider.user.first_name}} {{rider.user.last_name}} </b></h5>
+                        {% if not rider.role == 'member' %}
+                        <small class="card-subtitle mb-2 text-muted"><b>{{rider.role}}</b></small>
+                        {% endif %}
+                        <p class="card-text article-content">
+                            <details>
+                                <summary>קצת עליי</summary>
+                                <p>{{ rider.about_me |linebreaks }}</p>
+                            </details>
+                        </p>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endblock content %}
+
+
+

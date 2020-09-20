@@ -1,0 +1,40 @@
+{% extends "home/base.html" %}
+{% block content %}
+<style>
+a:hover {
+  color: transparent;
+
+}
+</style>
+    <article class="media content-section">
+        <div class="media-body text">
+        <legend class="border-bottom mb-4 title">
+            גלרייה
+            </legend>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row text-center text-lg-left">
+    {% for image in images %}
+      <div class="col-lg-3 col-md-4 col-6">
+        {% if request.user.is_authenticated %}
+        <a href="{{ image.link_to_google_drive }}" onClick="MyWindow=window.open('{{ image.link_to_google_drive }}','MyWindow','width=600,height=600'); return false;" class="d-block mb-4 h-100">
+              <img class="img-fluid img-thumbnail" src="{{ image.image.url }}" style="width:300px;height:220px;" alt="">
+              <figcaption class="figure-caption text-center"><b>{{ image.title }}</b></figcaption>
+            </a>
+        {% else %}
+        <img class="img-fluid img-thumbnail" src="{{ image.image.url }}" style="width:300px;height:220px;" alt="">
+        <figcaption class="figure-caption text-center"><b>{{ image.title }}</b></figcaption>
+        {% endif %}
+      </div>
+    {% endfor %}
+    </div>
+  
+  </div>
+  <!-- /.container -->
+  
+  
+  
+        </article>
+    
+{% endblock content %}

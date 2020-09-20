@@ -1,0 +1,165 @@
+{% extends "home/base.html" %}
+{% block content %}
+{% load custom_tags %} 
+<style>
+  body { margin:0;padding:0; }
+  table { 
+    /* font-size: 1.7vw;  */
+    table-layout:fixed;
+  }
+  td { 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+}
+@media only screen and (max-width: 480px) {
+    /* horizontal scrollbar for tables if mobile screen */
+    .tablemobile {
+        overflow-x: auto;
+        display: block;
+    }
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<article class="media content-section">
+    <div class="media-body text">
+        <legend class="border-bottom mb-4 title">
+            מפגשים
+        </legend>
+          <p class="article-content">
+            <input class="form-control" id="myInput" type="text" placeholder="חפש מפגש" style="display: inline-block;   position:relative;
+            width:30%;">
+            <br>
+            <br>
+            <table class="table table-bordered table-striped" style="position:relative;
+            width:100%;">
+                <thead>
+                <tr>
+                    <th>שם המפגש</th>
+                    <th>תאריך</th>
+                    <th>מיקום המפגש</th>
+
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                  {% for even in event %}
+                    <tr>
+                    <td>{{even.title}}</td>
+                    <td>{{even.event_date |date:'d/m/y' }}</td>
+                    <td>{{even.address}}</td>
+                    <td> 
+                        <button class="btn-secondary btn-sm mt-1 mb-1" data-toggle="modal"  data-target="#{{even.id}}" style="float: right;" href="#">לכל הפרטים</button> 
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{even.id}}" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text" style="text-align: right;">פרטי המפגש</h4>
+                                <p style="margin: 0 auto;"></p>
+                              </div>
+                              <div class="modal-body">
+                                <b>{{even.title}}</b>
+                                <br>
+                                <b>מועד:</b>
+                                {{even.event_date |date:'d/m/y'}}, 
+                                {{even.event_date|time:'H:i' }}
+                                <br>
+                                <b>מיקום:</b>
+                                {{even.address}}
+                                <br>
+                                <br>
+                                <p>{{even.content}}</p>
+                                <br>
+                                <iframe src="{{even.google_map}}" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                    </td>
+                    <td> 
+                      
+                      <!-- check if valid date  {start if 1}-->
+                      {% if not even.check_if_date_passed %} 
+                      <!-- check if user is logged in {start if 2}-->
+                        {% if user.is_authenticated %}
+                            <!-- check if user already register to the event {start if 3} -->
+                            {% if user.username in even.subscribed_to_event.split %}
+                              <form method="POST">
+                                {% csrf_token %}
+                                <input value="{{ even.id }}" name= "id" hidden>
+                                <button class = "btn-danger btn-sm mt-1 mb-1" type="submit" value="Click" name= "undo_reg_event">ביטול הרשמה</button>
+                              </form>
+
+                              {% else %}
+
+                              <button class="btn-info btn-sm mt-1 mb-1" data-toggle="modal"  data-target="#register_even{{ even.id }}" style="float: right;" href="#">הרשמה למפגש</button> 
+
+                              <!-- Modal -->
+                              <div class="modal fade" id="register_even{{ even.id }}" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title text" style="text-align: right;">הרשמה למפגש</h4>
+                                      <p style="margin: 0 auto;"></p>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form method="POST">
+                                        {% csrf_token %}
+        
+                                        <input type="checkbox" class="form-check-input" name="extra_pass" id="extra_pass">
+                                        <label class="form-check-label" for="extra_pass">---מגיעים עם מורכב</label>
+        
+                                        <input value="{{ even.id }}" name= "id" hidden>
+                                        <br><br>
+                                        <button class = "btn-success btn-sm mt-1 mb-1" type="submit" value="Click" name= "reg_event">אישור הרשמה</button>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- end if 3 -->
+                            {% endif %}
+                        {% else %}
+                          <a class="btn-secondary btn-sm mt-1 mb-1" href="{% url 'login' %}">התחברו כדי להירשם</a> 
+                          <!-- end if 2 -->
+                        {% endif %}
+                        {%else%}
+                        <button  class="btn-secondary btn-sm mt-1 mb-1 btn-disable" disabled href="#">לא ניתן להירשם</button >
+                        <!-- end if 1 -->
+                      {% endif %}
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <script>
+                $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                });
+            </script>
+            </p>
+      </div>
+  </article>
+
+{% endblock content %}

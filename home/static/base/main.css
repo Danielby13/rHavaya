@@ -1,0 +1,236 @@
+
+
+/* Css*/
+.frontpage_picture img {
+  max-height: 400px; 
+  object-fit: fill;
+}
+.frontpage_picture {
+  height: 100%;
+  overflow:hidden;
+  
+}
+
+.fronpage_logoRochvim{
+  max-width: 550px;
+  height: 310px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-bottom: -80px;
+  margin-top: -50px;
+}
+
+
+.font-color{
+  color: white !important;
+}
+
+.font-color a{
+  text-decoration: none;
+}
+
+
+.text {
+  text-align: right;
+  direction: rtl;
+}
+
+.future_events_box {
+  position: left;
+  text-align: right;
+  padding: 10px;
+  font-size: 90%;
+  background-color: #ffffff;
+  /* margin-right: 20px;
+  height: 290px; */
+  width: 300px;
+  height: 250px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.future_events_box_heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.future_events_box1 a{
+  color: black;
+  text-decoration: none;
+}
+
+.future_events_box a:hover{
+  text-decoration: underline
+}
+/* check */
+.img-future {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered-future {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* endcheck */
+.footer {
+  background-color: #5b6065;
+  overflow: auto;
+  font-family: Tahoma;
+  font-weight: bold;
+  font-size: 85%;
+  color: white;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+  margin-top: auto;
+}
+
+.message {
+  width: 20px;
+}
+
+.title {
+  font-size: 130%;
+  font-weight: bold;
+}
+
+.box {
+  word-wrap: break-word;
+  width: 70%;
+  text-align-last: right;
+  display: inline-block;
+  border: 1px solid #b9c6c6;
+  padding: 10px;
+  position: relative;
+}
+
+.profile_title {
+  font-size: 180%;
+  font-weight: bold;
+}
+.content-section {
+  background: #ffffff;
+  padding: 6px 10px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  position:relative;
+  width:auto;
+}
+
+body {
+  background: #f0f0f0;
+  color: #333333;
+  position: absolute;
+  width: 100%;
+}
+
+.cards_ul {
+  padding: 0;
+  display:table;
+  width:100%;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+
+.button_copy {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+.button_copy:focus {
+  border: none;
+}
+
+.check{
+  display: flex;
+  justify-content: center;
+}
+
+.no-resize, .resize {
+  width: 100px;
+  height: 50px;
+  border: 1px solid #000;
+  color: #000;
+  float: left;
+  margin-left: 10px;
+  font-size: 15px
+}
+
+.tt{
+  position: relative;
+  overflow-wrap: break-word;
+}
+
+.feedbacks_comments {
+  max-width: 900px;  
+
+}
+#feedbackContent{
+  word-wrap: break-word;
+  }
+
+.button-whatsapp {
+  transition-duration: 0.4s;
+  color: #4FCE5D;
+}  
+.button-whatsapp:hover {
+  color: #108a1e;
+
+}
+
+.button-gmail {
+  transition-duration: 0.4s;
+  color: #db0404;
+}  
+
+
+
+
+/*Carousel Css*/
+.carousel-item img {
+  max-height: 300px;
+  object-fit: fill;
+}
+.carousel {
+  height: 250px;
+  overflow:hidden;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  max-width: 500px;
+  width: 500px;
+  
+}
+@media screen and (max-width: 480px) {
+  carousel {
+       width: 410px;
+  }
+}
+.carousel-item {
+  text-align: center;
+}
+
+.text_carousel{
+  position: absolute;
+  top: 225px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/*end of carousel*/
+
+
+.inline-block-child {
+  display: inline-block;
+  position: relative;
+
+}

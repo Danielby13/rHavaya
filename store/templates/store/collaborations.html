@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+{% block content %}
+        <article class="media content-section">
+          <div class="media-body text">
+            <div class="row col-18 ">
+                {% for col in collaborations %}
+                <div class="card col-11" style=" width: 36rem;  margin: 10px;">
+                    <img class="card-img-top " style="object-fit: cover; height: 200px; width: 100%; margin-top: 2px;" src="{{ col.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><b> {{col.title}}</b> <small class="text-muted" style="font-size: 60%;">{{col.date_posted.date|date:"d/m/y"}}</small></h5>
+                        <p class="card-text article-content">
+                                <p>{{ col.content |linebreaks }}</p>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endblock content %}
+
+
+

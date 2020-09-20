@@ -1,0 +1,25 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="text content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<div class="title">
+				<legend class="border-bottom mb-4 ">
+						התחברות 
+				</legend>
+			</div>
+			<fieldset class="form-group" style="width:400px">
+				{{ form|crispy }}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">התחברות</button>
+			</div>
+		</form>
+		<div class="border-top pt-3">
+			<small class="text-muted"> עדיין לא נרשמת? <a class="ml-2" style="text-align: left;" href="{% url 'register' %}">הרשמה</a></small>
+			<small class="text-muted"> <a class="ml-2" style="text-align: left;" href="{% url 'password_reset' %}">שכחתי סיסמה</a></small>
+		</div>
+	</div>
+	
+{% endblock content %}

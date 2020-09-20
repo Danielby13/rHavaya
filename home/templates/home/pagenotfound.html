@@ -1,0 +1,22 @@
+
+{% block content %}
+<style>
+#background {
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: -1; 
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+</style>
+
+<div id="background">
+  <img src="/static/img/404error.png" class="stretch" alt="" />
+</div>
+{% endblock content %}
