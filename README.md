@@ -1,4 +1,4 @@
-# rHavya
+# rHavaya
 This project built for my sister's bikers group.
 
 Mainly to organize meetings and events.
