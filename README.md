@@ -13,7 +13,7 @@ cd to the directory where requirements.txt is located (main folder)
 and then run pip install -r requirements.txt - it should install all the dependencies needed, include Django framework
 finally run python manage.py runserver
 ```
-Alternativy - to see the deployed project: [r-Havaya website](http://www.r-havaya.com) 
+Alternativy - see the deployed project: [r-Havaya website](http://www.r-havaya.com) 
 ## Built With
 * Django - The web framework used
 * Python
